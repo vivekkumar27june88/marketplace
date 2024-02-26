@@ -1,11 +1,18 @@
-<div class="grid grid-cols-12">
-  <header class="col-span-full">
-    <nav class="flex flex-row gap-3 items-center">
+<div class="grid grid-cols-12 bg-slate-200 min-h-screen"
+  style="grid-template-rows: 60px 1fr">
+
+  <header class="col-span-full flex flex-row items-center justify-center px-8">
+    <nav class="flex flex-row gap-4 items-center font-semibold text-xl">
       <a routerLink="home"
-        routerLinkActive="active-route"
-        class="">Home</a>
+        routerLinkActive="active-route !bg-blue-200"
+        class="tracking-wide border border-blue-400 bg-slate-200 w-[130px] text-center p-2 rounded-md">
+        Home
+      </a>
       <a routerLink="products"
-        routerLinkActive="active-route">Products</a>
+        routerLinkActive="active-route !bg-blue-200"
+        class="tracking-wide border border-blue-400 bg-slate-200 w-[130px] text-center p-2 rounded-md">
+        Products
+      </a>
     </nav>
   </header>
 

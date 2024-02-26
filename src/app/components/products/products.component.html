@@ -1,34 +1,59 @@
 <header class="flex flex-row items-center justify-between">
-  <h2 class="font-bold text-3xl">Products</h2>
+  <h2 class="font-bold text-4xl">Products</h2>
   <div class="flex flex-row items-center gap-0">
     <input type="search"
       #searchText
       placeholder="Search products..."
-      class="border border-gray-300 py-2 px-1 rounded-md" />
-    <button class="bg-blue-500 px-6 py-3 rounded-md"
+      class="border border-gray-300 py-3 px-2 rounded-s-md outline-none" />
+    <button class="bg-blue-500 px-6 py-3 rounded-e-md"
       (click)="onSearch(searchText.value)">
       Search
     </button>
   </div>
 </header>
 
-<main class="w-full mt-8">
-  <div class="grid grid-cols-3 w-full p-x-4 gap-x-2 gap-y-4">
-    <div>Id</div>
-    <div>Title</div>
-    <div>Description</div>
+<main class="w-full mt-8 shadow-md bg-white rounded-t-md">
+  <div class="grid grid-cols-12 w-full p-x-4 gap-x-2 gap-y-4 p-4">
+    <div class="col-span-2 pl-2 font-medium uppercase">Id</div>
+    <div class="col-span-3 font-medium uppercase">Title</div>
+    <div class="col-span-7 pr-2 font-medium uppercase">Description</div>
 
     <ng-container *ngFor="let p of productService.products$ | async ">
       <div class="col-span-full border-t"></div>
-      <div>{{p.id}}</div>
-      <div>{{p.title}}</div>
-      <div>{{p.description}}</div>
+      <div class="col-span-2 pl-2">{{p.id}}</div>
+      <div class="col-span-3">{{p.title}}</div>
+      <div class="col-span-7 pr-2">{{p.description}}</div>
     </ng-container>
   </div>
 </main>
 
-<footer>
-  <div>
-    
+<footer class="border-t border-gray-200 mx-auto flex items-center justify-between px-4 w-full bg-white p-3">
+  <div class=""></div>
+  <div class="flex flex-row items-center gap-4">
+    <button (click)="onFirst()"
+      [disabled]="productService.currentPage$.value === 0"
+      class="disabled:bg-gray-300 disabled:text-white disabled:border-gray-300 border border-blue-300 px-4 py-2 w-[100px] rounded-md bg-blue-100 font-medium">
+      First
+    </button>
+    <button (click)="onPrev()"
+      [disabled]="productService.currentPage$.value === 0"
+      class="disabled:bg-gray-300 disabled:text-white disabled:border-gray-300 border border-blue-300 px-4 py-2 w-[100px] rounded-md bg-blue-100 font-medium">
+      Prev
+    </button>
+    <button (click)="onNext()"
+      [disabled]="productService.currentPage$.value === productService.totalPage$.value - 1"
+      class="disabled:text-white disabled:border-gray-300 border border-blue-300 px-4 py-2 w-[100px] rounded-md bg-blue-100 font-medium disabled:bg-gray-300">
+      Next
+    </button>
+    <button (click)="onLast()"
+      [disabled]="productService.currentPage$.value === productService.totalPage$.value - 1"
+      class="disabled:bg-gray-300 disabled:text-white disabled:border-gray-300 border border-blue-300 px-4 py-2 w-[100px] rounded-md bg-blue-100 font-medium">
+      Last
+    </button>
+  </div>
+
+  <div class="flex flex-row gap-1 justify-self-end">
+    <span class="font-normal">Total:</span>
+    <span class="font-bold">{{productService.total$ | async}}</span>
   </div>
 </footer>

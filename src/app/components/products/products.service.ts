@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProductsService {
   pageSize$ = new BehaviorSubject<number>(5);
   currentPage$ = new BehaviorSubject<number>(0);
+  totalPage$ = new BehaviorSubject<number>(0);
   total$ = new BehaviorSubject<number>(0);
   searchToken$ = new BehaviorSubject<string>('');
   products$ = new BehaviorSubject<ProductModel[]>([]);

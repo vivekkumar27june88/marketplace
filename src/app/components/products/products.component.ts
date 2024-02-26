@@ -19,6 +19,9 @@ export class ProductsComponent implements OnInit {
         map((d: any) => {
           this.productService.products$.next(d.products);
           this.productService.total$.next(d.total);
+          this.productService.totalPage$.next(
+            d.total / this.productService.pageSize$.value
+          );
         })
       )
       .subscribe();
@@ -28,6 +31,32 @@ export class ProductsComponent implements OnInit {
 
   onSearch(token: string) {
     this.productService.searchToken$.next(token);
+    this.#fetchProduct();
+  }
+
+  onFirst() {
+    this.productService.currentPage$.next(0);
+    this.#fetchProduct();
+  }
+
+  onPrev() {
+    this.productService.currentPage$.next(
+      this.productService.currentPage$.value - 1
+    );
+    this.#fetchProduct();
+  }
+
+  onNext() {
+    this.productService.currentPage$.next(
+      this.productService.currentPage$.value + 1
+    );
+    this.#fetchProduct();
+  }
+
+  onLast() {
+    this.productService.currentPage$.next(
+      this.productService.totalPage$.value - 1
+    );
     this.#fetchProduct();
   }
 }
