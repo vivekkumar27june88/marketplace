@@ -1,0 +1,34 @@
+<header class="flex flex-row items-center justify-between">
+  <h2 class="font-bold text-3xl">Products</h2>
+  <div class="flex flex-row items-center gap-0">
+    <input type="search"
+      #searchText
+      placeholder="Search products..."
+      class="border border-gray-300 py-2 px-1 rounded-md" />
+    <button class="bg-blue-500 px-6 py-3 rounded-md"
+      (click)="onSearch(searchText.value)">
+      Search
+    </button>
+  </div>
+</header>
+
+<main class="w-full mt-8">
+  <div class="grid grid-cols-3 w-full p-x-4 gap-x-2 gap-y-4">
+    <div>Id</div>
+    <div>Title</div>
+    <div>Description</div>
+
+    <ng-container *ngFor="let p of productService.products$ | async ">
+      <div class="col-span-full border-t"></div>
+      <div>{{p.id}}</div>
+      <div>{{p.title}}</div>
+      <div>{{p.description}}</div>
+    </ng-container>
+  </div>
+</main>
+
+<footer>
+  <div>
+    
+  </div>
+</footer>
